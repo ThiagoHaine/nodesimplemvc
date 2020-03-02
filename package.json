@@ -1,13 +1,14 @@
 {
   "name": "nodemvc",
   "version": "1.0.0",
-  "description": "",
+  "description": "Servidor MVC simples usando o node com o express",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "serve": "nodemon server.js"
   },
-  "author": "",
+  "author": "Thiago Haine",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "2.0.2"
