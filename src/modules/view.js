@@ -9,6 +9,10 @@ module.exports = (name,action,model)=>{
         layout = fs.readFileSync("src/layout/"+model.layout+".html","utf8");
     }
 
+    if (layout!="" && layout!=undefined){
+        text = layout.replace("@content", text);
+    }
+
     if (model!=undefined){
         let t = text.split("{{");
         if (t.length!=1){
@@ -31,10 +35,6 @@ module.exports = (name,action,model)=>{
             });
         }
 
-    }
-
-    if (layout!="" && layout!=undefined){
-        text = layout.replace("@content", text);
     }
     return text;
 }
