@@ -1,8 +1,8 @@
 const app = require("./src/modules/route");
 const config = {
-    controllers: [],
+    controllers: ["default"],
     port: 3000,
     defaultPath: "index",
-    defaultController: "principal"
+    defaultController: "default"
 };
 app(config);

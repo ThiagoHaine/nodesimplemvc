@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const controllerBase = require("./controller");
 const viewBase = require("./view");
-
+const formidable = require('express-formidable');
+app.use(formidable());
 
 
 module.exports = (config)=>{
