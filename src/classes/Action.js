@@ -6,7 +6,16 @@ class Action{
     constructor(html, path, method){
         this.html = html || "";
         this.path = path || "index";
-        this.method = method || "get";
+
+        if (method){
+            if (typeof method === "string"){
+                this.method = [method];
+            }else{
+                this.method = method
+            }
+        }else{
+            this.method = ["get"];
+        }
     }
 }
 

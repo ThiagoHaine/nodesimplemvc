@@ -1,4 +1,4 @@
-const Form = require("../classes/Form");
+const RequestData = require("../classes/RequestData");
 
 function returnHTML(action, response, request){
     if (!typeof action.html === "function"){
@@ -6,22 +6,25 @@ function returnHTML(action, response, request){
     }
 
     return new Promise(send=>{
-        action.html(send, new Form().process(request));
+        action.html(send, new RequestData().process(request));
     }).then((html)=>{
         response.send(html);
     });
 }
 
 module.exports = (app,actions,path,config)=>{
+    path = `/${path}/`;
+
     for(let i=0;i<actions.length;i++){
-        let action = actions[i].method;
+        let methods = actions[i].method;
         let sendAction = (req, resp)=>{returnHTML(actions[i], resp, req)};
         actions[i].path = actions[i].path.replace(/\//g, "");
-        path = `/${path}/`;
         
-        app[action](path+actions[i].path, sendAction);
-
-        if (actions[i].path==config.defaultPath && action.toLowerCase()=="get"){
+        methods.forEach(method=>{
+            app[method](path+actions[i].path, sendAction);
+        })
+        
+        if (actions[i].path==config.defaultPath && !!methods.find(a=>a=="get")){
             app.get(path, sendAction);
 
             if (path==`/${config.defaultController}/`){
