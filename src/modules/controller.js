@@ -1,62 +1,29 @@
-function parseData(data){
-    let obj = {};
-    let infos = data.split("&");
-
-    for(let i=0;i<infos.length;i++){
-        let info = infos[i].split("=");
-
-        obj[info[0]]=info[1];
-    }
-
-    return obj;
-}
-
-function returnHTML(action,data){
-    data = data || undefined;
-    if (typeof action.html === "function"){
-        if (data==undefined){
-            return action.html();
-        }else{
-            return action.html(parseData(data));
-        }
-    }else{
+function returnHTML(action, resp){
+    if (!typeof action.html === "function"){
         return action.html;
     }
+
+    return new Promise(send=>{
+        action.html(send);
+    }).then((html)=>{
+        resp.send(html);
+    });
 }
 
-module.exports = (app,actions,name,config)=>{
+module.exports = (app,actions,path,config)=>{
     for(let i=0;i<actions.length;i++){
-        if (actions[i].path.substr(actions[i].path.length-1,1)=="/"){
-            actions[i].path = actions[i].path.substr(0,actions[i].path.length-1);
-        }
-
-
         let action = actions[i].method || "get";
-
-        switch(action.toLowerCase()){
-            case "get":
-            default:
-                app.get("/"+name+"/"+actions[i].path,function(req,resp){ resp.send(returnHTML(actions[i]));});
-                break;
-            case "post":
-                app.post("/"+name+"/"+actions[i].path,function(req,resp){ 
-                    let data = "";
-                    req.on("data",function(chunk){
-                        data += chunk;
-                    });
-                    req.on("end",function(){
-                        resp.send(returnHTML(actions[i],data));
-                    });
-                });
-                break;
-        }
+        let sendAction = (req, resp)=>{returnHTML(actions[i], resp)};
+        actions[i].path = actions[i].path.replace(/\//g, "");
+        path = `/${path}/`;
         
+        app[action](path+actions[i].path, sendAction);
 
         if (actions[i].path==config.defaultPath && action.toLowerCase()=="get"){
-            app.get("/"+name+"/",function(req,resp){resp.send(returnHTML(actions[i]));});
+            app.get(path, sendAction);
 
-            if (name==config.defaultController){
-                app.get("/",function(req,resp){resp.send(returnHTML(actions[i]));});
+            if (path==config.defaultController){
+                app.get("/", sendAction);
             }
         }
     }

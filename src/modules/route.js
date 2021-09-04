@@ -6,6 +6,7 @@ const viewBase = require("./view");
 
 
 module.exports = (config)=>{
+    const port = (config.port || 3000);
     var ac = ""; //actual controller
 
     function view(name,model){
@@ -18,8 +19,8 @@ module.exports = (config)=>{
         let actions = actionBase(view);
         controllerBase(app,actions,ac,config);
     }
-
-    app.listen((config.port || 3000),function(){
-        console.log("O servidor esta rodando na porta "+(config.port || 3000));
+    
+    app.listen(port, function(){
+        console.log("The server is running at port "+port);
     });
 };
