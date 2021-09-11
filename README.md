@@ -1,5 +1,5 @@
 # Node Simple MVC
-A simple MVC implementation usind Node and Express based on ASP NET MVC.
+A simple MVC implementation usind Node and Express, based on ASP NET MVC.
 
 ## Features
 1. ASP NET MVC like folder structure
