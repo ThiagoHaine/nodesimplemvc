@@ -11,7 +11,7 @@ class RequestData{
         this.session = undefined;
     }
 
-    process(req){
+    Process(req){
         this.queryString = req.query;
         this.files = req.files;
         this.form = req.fields;

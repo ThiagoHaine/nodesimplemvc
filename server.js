@@ -12,4 +12,5 @@ const config = {
         new StaticFolder("static", "/lib")
     ]
 };
+
 app(config);

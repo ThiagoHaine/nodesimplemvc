@@ -6,7 +6,7 @@ function returnHTML(action, response, request){
     }
 
     return new Promise(send=>{
-        action.html(send, new RequestData().process(request));
+        action.html(send, new RequestData().Process(request));
     }).then((html)=>{
         response.send(html);
     });
