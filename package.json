@@ -1,8 +1,8 @@
 {
-  "name": "nodemvc",
-  "version": "1.0.0",
-  "description": "Servidor MVC simples usando o node com o express",
-  "main": "server.js",
+  "name": "node-simple-mvc",
+  "version": "1.0.5",
+  "description": "Simple MVC server using node and express",
+  "main": "package.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",

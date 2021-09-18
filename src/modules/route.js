@@ -37,14 +37,15 @@ module.exports = (config)=>{
     //Static folders processing
     if (config.staticFolders){
         config.staticFolders.forEach(staticFolder=>{
-            app.use(staticFolder.path, express.static(staticFolder.path));
+            app.use(staticFolder.path, express.static(process.cwd()+staticFolder.folder));
         });
     }
     
     //Controller and View processing
     for(let i=0;i<config.controllers.length;i++){
         let ac = config.controllers[i];
-        let actionBase = require("../controller/"+ac+"Controller.js");
+        let dir = process.cwd();
+        let actionBase = require(dir + "/src/controller/" + ac + "Controller.js");
         let actions = actionBase((name,model)=>viewBase(ac,name,model));
         controllerBase(app,actions,ac,config);
     }

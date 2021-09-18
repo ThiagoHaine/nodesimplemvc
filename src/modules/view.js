@@ -1,12 +1,13 @@
 let fs = require("fs");
 
 module.exports = (name,action,model)=>{
-    let text = fs.readFileSync("src/view/"+name+"/"+action+".html","utf8");
+    let dir = process.cwd();
+    let text = fs.readFileSync(dir+"/src/view/"+name+"/"+action+".html","utf8");
     let layout = "";
     model = model || undefined;
 
     if (model!=undefined && model.layout!=undefined){
-        layout = fs.readFileSync("src/layout/"+model.layout+".html","utf8");
+        layout = fs.readFileSync(dir+"/src/layout/"+model.layout+".html","utf8");
     }
 
     if (layout!="" && layout!=undefined){
