@@ -44,6 +44,18 @@ The constructor of this class must be like this:
 new StaticFolder("folderInYourComputer", "/folderInTheRequest");
 ```
 
+### Folder structure
+The folder structure is extremely similar to Asp.NET MVC folder structure, and is mandatory to work:
+
+    .
+    ├── src                   
+    │   ├──controller           # All .js controller files, with name like 'nameController.js'
+    │   ├──view                 # All controller folders, and inside the controller folder, the .html view files
+    │   └──layout               # All .html layout files
+    └── server.js    
+
+
+
 ### Creating controllers
 To add a controller named **example**, follow these steps:
 1. Create a file named **exampleController.js** in the ./src/controller project folder
