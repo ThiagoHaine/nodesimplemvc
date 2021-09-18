@@ -3,12 +3,14 @@ class RequestData{
     files;
     queryString;
     session;
+    params;
 
     constructor(){
         this.queryString = "";
         this.files = "";
         this.form = "";
         this.session = undefined;
+        this.params = {};
     }
 
     Process(req){
@@ -16,6 +18,7 @@ class RequestData{
         this.files = req.files;
         this.form = req.fields;
         this.session = req.session;
+        this.params = req.params;
 
         return this;
     }

@@ -92,6 +92,7 @@ class RequestData{
     files;
     queryString;
     session;
+    params;
 }
 ```
 - The `View` function received by the controller are necessary to return a view file with your action, example, guessing you have a **exampleFile.html** in your ./src/view/example folder, you can do that:
