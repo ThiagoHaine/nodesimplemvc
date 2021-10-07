@@ -1,6 +1,6 @@
 {
   "name": "node-simple-mvc",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Simple MVC server using node and express",
   "main": "package.js",
   "scripts": {
