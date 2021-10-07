@@ -95,6 +95,11 @@ class RequestData{
     params;
 }
 ```
+- To make a redirect, just pass this syntax to the `Send` function:
+```
+redirect: https://google.com.br
+```
+
 - The `View` function received by the controller are necessary to return a view file with your action, example, guessing you have a **exampleFile.html** in your ./src/view/example folder, you can do that:
 ```
 ...

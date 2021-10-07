@@ -8,7 +8,12 @@ function returnHTML(action, response, request){
     return new Promise(send=>{
         action.html(send, new RequestData().Process(request));
     }).then((html)=>{
-        response.send(html);
+        let redirect = html.match(/^redirect: ((?:https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b)?\/{0,1}(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*))$/);
+
+        if (redirect)
+            response.redirect(redirect[1]);
+        else
+            response.send(html);
     });
 }
 
